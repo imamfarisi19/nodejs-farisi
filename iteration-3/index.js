@@ -23,11 +23,16 @@ app.listen(port, hostname, () => {
 });
 
 const homeController = require('./controllers/home')
+app.get('/', homeController)
+
 const newPostController = require('./controllers/newPost')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
-const newUserController = require('./controllers/newUser')
-
-app.get('/', homeController)
 app.get('/post/:id', getPostController)
-app.get('/posts/new', newPo
+app.get('/posts/new', newPostController)
+app.post('/posts/store', storePostController)
+
+const newUserController = require('./controllers/newUser')
+const StoreUserController = require('./controllers/StoreUser')
+app.get('/auth/register', newUserController)
+app.post('/users/register', StoreUserController)
