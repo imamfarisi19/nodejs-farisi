@@ -23,7 +23,9 @@ app.listen(port, hostname, () => {
 });
 
 const loginController = require('./controllers/login')
+const loginUserController = require('./controllers/loginUser')
 app.get('/auth/login', loginController)
+app.post('/users/login', loginUserController)
 
 const homeController = require('./controllers/home')
 app.get('/', homeController)
