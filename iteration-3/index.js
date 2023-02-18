@@ -22,6 +22,9 @@ app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
+const loginController = require('./controllers/login')
+app.get('/auth/login', loginController)
+
 const homeController = require('./controllers/home')
 app.get('/', homeController)
 
