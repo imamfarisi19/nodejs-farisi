@@ -40,7 +40,7 @@ const loginUserController = require('./controllers/loginUser')
 app.get('/auth/login', ifAuthenticatedMIddleware, loginController)
 app.post('/users/login', ifAuthenticatedMIddleware, loginUserController)
 
-const logoutController = require('/controllers/logout')
+const logoutController = require('./controllers/logout')
 app.get('/auth/logout', logoutController)
 
 const homeController = require('./controllers/home')
