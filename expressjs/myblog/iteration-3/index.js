@@ -6,10 +6,11 @@ const app = new express()
 const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
-const validateMiddleware = require("./middleware/validationMiddleware")
+const validateMiddleWare = require('./middleware/validationMiddleware')
 const expressSession = require('express-session')
 const authMiddleware = require("./middleware/authMIddleware")
 const ifAuthenticatedMIddleware = require("./middleware/ifAuthenticatedMiddleware")
+const flash = require('connect-flash')
 
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb://127.0.0.1:27017/my_database', { useNewUrlParser: true });
@@ -18,6 +19,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload())
 app.use(expressSession({ secret: 'keyboard cat' }))
+app.use('/posts/store', validateMiddleWare)
+app.use(flash())
 app.set('view engine', 'ejs')
 
 app.listen(port, hostname, () => {
@@ -32,23 +35,20 @@ app.use("*", (req, res, next) => {
 
 const newUserController = require('./controllers/newUser')
 const StoreUserController = require('./controllers/StoreUser');
-app.get('/auth/register', ifAuthenticatedMIddleware, newUserController)
-app.post('/users/register', ifAuthenticatedMIddleware, StoreUserController)
-
 const loginController = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
-app.get('/auth/login', ifAuthenticatedMIddleware, loginController)
-app.post('/users/login', ifAuthenticatedMIddleware, loginUserController)
-
 const logoutController = require('./controllers/logout')
-app.get('/auth/logout', logoutController)
-
 const homeController = require('./controllers/home')
-app.get('/', homeController)
-
 const newPostController = require('./controllers/newPost')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
+
+app.get('/auth/register', ifAuthenticatedMIddleware, newUserController)
+app.post('/users/register', ifAuthenticatedMIddleware, StoreUserController)
+app.get('/auth/login', ifAuthenticatedMIddleware, loginController)
+app.post('/users/login', ifAuthenticatedMIddleware, loginUserController)
+app.get('/auth/logout', logoutController)
+app.get('/', homeController)
 app.get('/post/:id', getPostController)
 app.get('/posts/new', authMiddleware, newPostController)
 app.post('/posts/store', authMiddleware, storePostController)
