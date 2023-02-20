@@ -29,12 +29,12 @@ app.listen(port, hostname, () => {
 
 global.loggedIn = null;
 app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId
+    loggedIn = req.session.userId;
     next()
 })
 
 const newUserController = require('./controllers/newUser')
-const StoreUserController = require('./controllers/StoreUser');
+const storeUserController = require('./controllers/StoreUser');
 const loginController = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
 const logoutController = require('./controllers/logout')
@@ -43,8 +43,8 @@ const newPostController = require('./controllers/newPost')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
 
-app.get('/auth/register', ifAuthenticatedMIddleware, newUserController)
-app.post('/users/register', ifAuthenticatedMIddleware, StoreUserController)
+app.get('/auth/register', newUserController)
+app.post('/users/register', ifAuthenticatedMIddleware, storeUserController)
 app.get('/auth/login', ifAuthenticatedMIddleware, loginController)
 app.post('/users/login', ifAuthenticatedMIddleware, loginUserController)
 app.get('/auth/logout', logoutController)
