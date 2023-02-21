@@ -2,12 +2,14 @@
     "name": "iteration-2",
     "version": "1.0.0",
     "description": "",
+    "engines": { "node": "19.6.0 " },
+    "contributors": ["Dabid Miller (http://davidmiller.io/)"],
     "main": "index.js",
     "scripts": {
         "start": "nodemon index.js"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "Start Bootstrap",
+    "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.1.0",
         "body-parser": "^1.20.1",

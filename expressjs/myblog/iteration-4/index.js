@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const hostname = '127.0.0.1';
-const port = 3000;
+// const port = 4000;
 const app = new express()
 const ejs = require('ejs')
 const bodyParser = require('body-parser')
@@ -23,7 +23,12 @@ app.use(expressSession({ secret: 'keyboard cat' }))
 app.use('/posts/store', validateMiddleWare)
 app.set('view engine', 'ejs')
 
-app.listen(port, hostname, () => {
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 4000;
+}
+
+app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
