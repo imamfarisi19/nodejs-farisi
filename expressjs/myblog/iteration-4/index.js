@@ -7,10 +7,10 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const validateMiddleWare = require('./middleware/validationMiddleware')
+const flash = require('connect-flash')
 const expressSession = require('express-session')
 const authMiddleware = require("./middleware/authMIddleware")
 const ifAuthenticatedMIddleware = require("./middleware/ifAuthenticatedMiddleware")
-const flash = require('connect-flash')
 
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb://127.0.0.1:27017/my_database', { useNewUrlParser: true });
@@ -18,9 +18,9 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload())
+app.use(flash())
 app.use(expressSession({ secret: 'keyboard cat' }))
 app.use('/posts/store', validateMiddleWare)
-app.use(flash())
 app.set('view engine', 'ejs')
 
 app.listen(port, hostname, () => {
