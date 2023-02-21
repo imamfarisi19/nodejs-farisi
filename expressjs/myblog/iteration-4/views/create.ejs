@@ -33,17 +33,23 @@
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
                                 <form action="/posts/store" method="POST" enctype="multipart/form-data">
-                                    <div class="form-floating">
+                                    <div class="form-floating mb-3">
                                         <input class="form-control" id="title" name="title" type="text" placeholder="Enter your title..." required/>
                                         <label for="title">Title</label>
                                         <div class="invalid-feedback">A title is required.</div>
                                     </div>
-                                    <div class="form-floating">
+                                    <div class="form-floating mb-3">
                                         <textarea class="form-control" id="body" name="body" placeholder="Enter your body here..." style="height: 12rem" required></textarea>
-                                        <label for="body">Body</label>
+                                        <label for="body">Description</label>
+                                        <script>
+                                            $('#body').summernote({
+                                                tabsize: 2,
+                                                height: 200
+                                            });
+                                        </script>
                                         <div class="invalid-feedback">A body is required.</div>
                                     </div>
-                                    <div class="form-floating">
+                                    <div class="form-floating mb-3">
                                         <input class="form-control" id="image" name="image" type="file" placeholder="Enter your image..." required/>
                                         <label for="image">Image</label>
                                         <div class="invalid-feedback">An image is required.</div>
