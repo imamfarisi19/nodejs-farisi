@@ -13,7 +13,7 @@ const authMiddleware = require("./middleware/authMIddleware")
 const ifAuthenticatedMIddleware = require("./middleware/ifAuthenticatedMiddleware")
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://test123:test12345@cluster0.lso0uoq.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://test123:test12345@cluster0.lso0uoq.mongodb.net/myBlog?retryWrites=true&w=majority', { useNewUrlParser: true });
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
