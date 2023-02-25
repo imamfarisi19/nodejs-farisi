@@ -16,7 +16,7 @@ export default class moviesDAO {
     static async getMovies({ // default filter
         filters = null,
         page = 0,
-        moviesperPage = 20, // will only get 20 movies at once
+        moviesPerPage = 20, // will only get 20 movies at once
     } = {}) {
         let query
         if (filters) {
@@ -33,7 +33,7 @@ export default class moviesDAO {
                 .limit(moviesPerPage)
                 .skip(moviesPerPage * page)
             const moviesList = await cursor.toArray()
-            const totalNumMovies = await movies.countDocumenct(query)
+            const totalNumMovies = await movies.countDocuments(query)
             return { moviesList, totalNumMovies }
         } catch (e) {
             console.error(`Unable to issue find command, ${e}`)
