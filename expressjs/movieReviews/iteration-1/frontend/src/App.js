@@ -10,6 +10,17 @@ import Movie from "./components/movie";
 import Login from "./components/login";
 
 function App() {
+  const [user, setUser] = React.userState(null);
+
+  async function login(user = null) {
+    // default user to null
+    setUser(user);
+  }
+
+  async function logout() {
+    setUser(null);
+  }
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -21,11 +32,7 @@ function App() {
               <Link to={"/movies"}>Movies</Link>
             </Nav.Link>
             <Nav.Link>
-              {user ? (
-                <a>Logout User</a>
-              ) : (
-                <Link to={"/login"}>Login</Link>
-              )}
+              {user ? <a onClick={logout}>Logout User</a> : <Link to={"/login"}>Login</Link>}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
