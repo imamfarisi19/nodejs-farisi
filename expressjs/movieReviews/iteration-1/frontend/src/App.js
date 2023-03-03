@@ -1,8 +1,10 @@
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link, browserHistory, Router, Route } from "react-router-dom";
 
 import AddReview from "./components/add-review";
 import MoviesList from "./components/movies-list";
