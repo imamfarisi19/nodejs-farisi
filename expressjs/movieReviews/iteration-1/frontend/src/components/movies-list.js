@@ -52,6 +52,28 @@ const MovieList = (props) => {
     setSearchRating(searchRating);
   };
 
+  const find = (query, by) => {
+    MovieDataService.find(query, by)
+      .then((response) => {
+        console.log(response.data);
+        setMovies(response.data.movies);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const findByTitle = () => {
+    find(searchTitle, "title");
+  };
+  const findByRating = () => {
+    if (searchRating === "All Ratings") {
+      retrieveMovies();
+    } else {
+      find(searchRating, "rated");
+    }
+  };
+
   return (
     <div className="App">
       <Container>
