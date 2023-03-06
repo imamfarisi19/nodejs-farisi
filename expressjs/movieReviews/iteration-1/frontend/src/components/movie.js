@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/esm/Button";
 import Media from "react-bootstrap/Media";
+import moment from "moment";
 
 const Movie = (props) => {
   const [movie, setMovie] = useState({
@@ -53,6 +54,37 @@ const Movie = (props) => {
             </card>
             <br></br>
             <h2>Reviews</h2>
+            {movie.reviews.map((review, index) => {
+              return (
+                <Media key={index}>
+                  <Media.Body>
+                    <h5>
+                      {review.name + " reviewed on "}{" "}
+                      {moment(review.date).format("Do MMMM YYYY")}
+                    </h5>
+                    <p>{review.review}</p>
+                    {props.user && props.user.id === review.user_id && (
+                      <Row>
+                        <Col>
+                          <Link
+                            to={{
+                              pathname:
+                                "/movies/" + props.match.params.id + "/review",
+                              state: { currentReview: review },
+                            }}
+                          >
+                            Edit
+                          </Link>
+                        </Col>
+                        <Col>
+                          <Button variant="link">Delete</Button>
+                        </Col>
+                      </Row>
+                    )}
+                  </Media.Body>
+                </Media>
+              );
+            })}
           </col>
         </Row>
       </Container>
