@@ -14,16 +14,24 @@ const MovieList = (props) => {
   const [searchRating, setSearchRating] = useState("");
   const [ratings, setRatings] = useState(["All Ratings"]);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [entriesPerPage, setEntriesPerPage] = useState(0);
+
   useEffect(() => {
     retrieveMovies();
     retrieveRatings();
   }, []);
 
+  useEffect(() => {
+    retrieveMovies();
+  }, [currentPage]);
+
   const retrieveMovies = () => {
     MovieDataService.getAll()
       .then((response) => {
-        console.log(response.data);
         setMovies(response.data.movies);
+        setCurrentPage(response.data.page);
+        setEntriesPerPage(response.data.entries_per_page);
       })
       .catch((e) => {
         console.log(e);
