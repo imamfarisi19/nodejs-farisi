@@ -114,7 +114,6 @@ const MovieList = (props) => {
             </col>
           </Row>
         </Form>
-
         <Row>
           {movies.map((movie) => {
             return (
@@ -132,6 +131,16 @@ const MovieList = (props) => {
             );
           })}
         </Row>
+        <br />
+        Showing page: {currentPage}.
+        <Button
+          variant="link"
+          onClick={() => {
+            setCurrentPage(currentPage + 1);
+          }}
+        >
+          Get next {entriesPerPage} results
+        </Button>
       </Container>
     </div>
   );
