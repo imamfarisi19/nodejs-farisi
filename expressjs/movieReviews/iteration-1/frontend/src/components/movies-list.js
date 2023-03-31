@@ -23,7 +23,7 @@ const MovieList = (props) => {
   }, [currentSearchModel]);
 
   useEffect(() => {
-    retrieveMovies();
+    // retrieveMovies();
     retrieveRatings();
   }, []);
 
@@ -87,6 +87,7 @@ const MovieList = (props) => {
     setCurrentSearchMode("findByTitle");
     find(searchTitle, "title");
   };
+
   const findByRating = () => {
     setCurrentSearchMode("findByRating");
     if (searchRating === "All Ratings") {
